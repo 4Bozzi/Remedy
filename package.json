@@ -1,0 +1,35 @@
+{
+  "name": "remedy",
+  "version": "1.0.0",
+  "description": "Take home assignment for Remedy.",
+  "main": "server.js",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node server.js",
+    "client": "node startclient.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/4Bozzi/Remedy.git"
+  },
+  "keywords": [
+    "teledoc"
+  ],
+  "author": "Andrew Bozzi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/4Bozzi/Remedy/issues"
+  },
+  "homepage": "https://github.com/4Bozzi/Remedy#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-formidable": "^1.2.0",
+    "pg": "^8.3.0",
+    "socket.io": "^2.3.0",
+    "unirest": "^0.6.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0"
+  }
+}
