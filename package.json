@@ -14,6 +14,10 @@
     "type": "git",
     "url": "git+https://github.com/4Bozzi/Remedy.git"
   },
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
   "keywords": [
     "teledoc"
   ],
