@@ -23,7 +23,7 @@
     "url": "https://github.com/4Bozzi/Remedy/issues"
   },
   "homepage": "https://github.com/4Bozzi/Remedy#readme",
-  "devDependencies": {
+  "dependencies": {
     "concurrently": "^5.2.0",
     "express": "^4.17.1",
     "express-formidable": "^1.2.0",
