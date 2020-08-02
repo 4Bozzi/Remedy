@@ -24,7 +24,7 @@ io.on("connection", (socket) => {
   console.log("New client connected");
   
   socket.on("FromAPI", req  => {
-    const identity = "Andrew";
+    const identity = `User:${Date.now()}`;
     const room = "TEST";
     const token = videoToken(identity, room, config);
     
