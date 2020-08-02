@@ -24,8 +24,8 @@ io.on("connection", (socket) => {
   console.log("New client connected");
   
   socket.on("FromAPI", req  => {
-    const identity = req.identity;
-    const room = req.room;
+    const identity = "Andrew";
+    const room = "TEST";
     const token = videoToken(identity, room, config);
     
     JSON.stringify({
@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
     })
 
     socket.doctor = connect.connectDoctor(socket);
-    socket.emit("FromAPI", {token: token.toJwt(), roomName: "TEST"});
+    socket.emit("FromAPI", {token: token.toJwt(), roomName: room, username: identity});
   });
 
   socket.on("disconnect", () => {
