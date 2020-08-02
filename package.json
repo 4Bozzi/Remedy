@@ -4,7 +4,7 @@
   "description": "Take home assignment for Remedy.",
   "main": "server.js",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "node server",
     "build": "cd client && npm i && npm build",
     "server": "node server.js",
     "client": "node startclient.js",
