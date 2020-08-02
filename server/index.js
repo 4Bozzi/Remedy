@@ -9,7 +9,7 @@ const socketIo = require("socket.io");
 const bodyParser = require('body-parser');
 const pino = require('express-pino-logger')();
 
-const port = 3001;
+const PORT = process.env.PORT || 5000;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -42,4 +42,4 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(port, () => console.log(`Listening on port ${port}`));
+server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
