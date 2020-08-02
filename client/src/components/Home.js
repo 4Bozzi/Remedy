@@ -5,7 +5,7 @@ function Home() {
   return (
     <div>
       <h2>Home</h2>
-      <Link to="/lobby">I have an emergency</Link>
+      <Link to="/lobby"><span className="btn" >I have an emergency <span aria-label="screaming face emoji">😱️</span></span></Link>
     </div>
   );
 }

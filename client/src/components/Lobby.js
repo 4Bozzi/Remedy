@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import socketIOClient from "socket.io-client";
 import VideoCall from './VideoCall';
 import WaitingScreen from './WaitingScreen';
@@ -7,31 +7,31 @@ const ENDPOINT = "http://127.0.0.1:3001/";
 
 function Lobby() {
 
-  const [roomName, setRoomName] = useState('TEST');
+  const [roomName, setRoomName] =  useState(null);
   const [token, setToken] = useState(null);
-  const [response, setResponse] = useState(false);
-  const [username, setUsername] = useState('YOU');
+  //const username = 'YOU';
+  let socket = useRef(null);
 
   useEffect(() => {
-    const socket = socketIOClient(ENDPOINT);
-    socket.emit("FromAPI", {
-      identity: username,
-      room: roomName
-    });
+    socket.current = socketIOClient(ENDPOINT);
 
-    socket.on("FromAPI", data => {
+    socket.current.emit("FromAPI", {});
+
+    socket.current.on("FromAPI", data => {
+      setRoomName(data.roomName);
       setToken(data.token);
-      setResponse(data.doctor);
-    });
+    });  
   }, []);
 
+
   const handleLogout = useCallback(event => {
-    setToken(null);
+    setToken("");
+    socket.current.disconnect(true);
   }, []);
 
   return (
     <div>
-      {response ? <VideoCall roomName={roomName} token={token} handleLogout={handleLogout} /> : <WaitingScreen />}
+      {token ? <VideoCall roomName={roomName} token={token} handleLogout={handleLogout} /> : <WaitingScreen />}
     </div>
   );
 }
