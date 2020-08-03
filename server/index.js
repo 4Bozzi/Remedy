@@ -4,7 +4,7 @@ const Connect = require('../services/Connect.js')
 
 const express = require('express');
 const http = require("http");
-const socketIo = require("socket.io");
+//const socketIo = require("socket.io");
 const bodyParser = require('body-parser');
 const pino = require('express-pino-logger')();
 const path = require('path');
@@ -16,16 +16,19 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // app.use(pino);
-// app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
+app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 // app.get("*", (req, res) => {
 //   res.sendFile(path.resolve(__dirname, "../react-ui/build", "index.html"));
 // });
 
 
 
-const server = http.createServer(app);
+
+
+const server = http.createServer(app.listen(PORT));
 server.use((req, res) => res.sendFile(path.resolve(__dirname, "../react-ui/build", "index.html")));
-const io = socketIo(server);
+//const io = socketIo(server);
+const io = require('socket.io').listen(server);
 const connect = new Connect();
 
 io.on("connection", (socket) => {
