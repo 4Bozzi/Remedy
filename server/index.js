@@ -12,7 +12,7 @@ const path = require('path');
 const PORT = process.env.PORT || 3001;
 
 const INDEX = '../react-ui/build/index.html';
-const app = express().use((req, res) => res.sendFile(INDEX, { root: __dirname }));
+const app = express().use((req, res) => sendFile(path.resolve(__dirname, "../react-ui/build", "index.html")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // app.use(pino);
