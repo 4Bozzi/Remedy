@@ -47,11 +47,11 @@ io.on("connection", (socket) => {
     })
 
     socket.emit("FromAPI", { token: token.toJwt(), roomName: doctor.roomName, username: identity });
-    socket.emit("connectDoctor", { token: token.toJwt(), roomName: doctor.roomName, username: doctor.doctorName });
+    doctor.socket.emit("connectDoctor", { token: token.toJwt(), roomName: doctor.roomName, username: doctor.doctorName });
   });
 
   socket.on("connectDoctor", req => {
-    connect.addDocToPool({doctorName: req.doctorName})
+    connect.addDocToPool({doctorName: req.doctorName, socket})
   });
 
   socket.on("disconnect", () => {
