@@ -20,9 +20,6 @@ const App = (props) => {
             <Route path="/lobby">
               <Lobby />
             </Route>
-            <Route path="/admin">
-              <Admin />
-            </Route>
           </Switch>
         </div>
       </Router>
