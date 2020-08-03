@@ -46,8 +46,8 @@ io.on("connection", (socket) => {
       token: token.toJwt()
     })
 
-    
     socket.emit("FromAPI", { token: token.toJwt(), roomName: doctor.roomName, username: identity });
+    socket.emit("connectDoctor", { token: token.toJwt(), roomName: doctor.roomName, username: doctor.doctorName });
   });
 
   socket.on("connectDoctor", req => {

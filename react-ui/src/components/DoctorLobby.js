@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import socketIOClient from "socket.io-client";
 import VideoCall from './VideoCall';
-import WaitingScreen from './WaitingScreen';
+import WaitingScreenDoc from './WaitingScreenDoc';
 
-function Lobby() {
+function DoctorLobby() {
   const [roomName, setRoomName] =  useState(null);
   const [token, setToken] = useState(null);
 
@@ -28,9 +28,9 @@ function Lobby() {
 
   return (
     <div>
-      {token ? <VideoCall roomName={roomName} token={token} handleLogout={handleLogout} /> : <WaitingScreen />}
+      {token ? <VideoCall roomName={roomName} token={token} handleLogout={handleLogout} /> : <WaitingScreenDoc />}
     </div>
   );
 }
 
-export default Lobby;
+export default DoctorLobby;
