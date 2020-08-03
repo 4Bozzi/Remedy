@@ -2,6 +2,8 @@ const config = require('./config');
 const { videoToken } = require('./tokens');
 const Connect = require('../services/Connect.js')
 
+
+const cors = require('cors');
 const express = require('express');
 const http = require("http");
 //const socketIo = require("socket.io");
@@ -11,19 +13,12 @@ const path = require('path');
 
 const PORT = process.env.PORT || 3001;
 
-
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-// app.use(pino);
+app.use(pino);
+app.use(cors());
 app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
-// app.get("*", (req, res) => {
-//   res.sendFile(path.resolve(__dirname, "../react-ui/build", "index.html"));
-// });
-
-
-
-
 
 const server = http.createServer(app.listen(PORT));
 //const io = socketIo(server);
