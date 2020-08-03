@@ -9,12 +9,12 @@ const socketIo = require("socket.io");
 const bodyParser = require('body-parser');
 const pino = require('express-pino-logger')();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3001;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(pino);
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
 const server = http.createServer(app);
 const io = socketIo(server);

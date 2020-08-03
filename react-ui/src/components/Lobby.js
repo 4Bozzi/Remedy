@@ -9,7 +9,7 @@ function Lobby() {
 
   const [roomName, setRoomName] =  useState(null);
   const [token, setToken] = useState(null);
-  //const username = 'YOU';
+  
   let socket = useRef(null);
 
   useEffect(() => {
