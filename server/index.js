@@ -36,9 +36,9 @@ if (!isDev && cluster.isMaster) {
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   app.use(pino);
-  app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
+  app.use(express.static(path.resolve(__dirname, './build')));
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../react-ui/build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "./build", "index.html"));
   });
 
   const server = http.createServer(app);
