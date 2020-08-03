@@ -25,7 +25,6 @@ app.use(function(req, res, next) {
   }
   next();
 });
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(pino);
@@ -38,16 +37,21 @@ io.on("connection", (socket) => {
   console.log("New client connected");
 
   socket.on("FromAPI", req => {
+    let doctor = connect.connectPatient(socket);
     const identity = `User:${Date.now()}`;
-    const room = "TEST";
-    const token = videoToken(identity, room, config);
+    // const room = "TEST";
+    const token = videoToken(identity, doctor.roomName, config);
 
     JSON.stringify({
       token: token.toJwt()
     })
 
-    socket.doctor = connect.connectDoctor(socket);
-    socket.emit("FromAPI", { token: token.toJwt(), roomName: room, username: identity });
+    
+    socket.emit("FromAPI", { token: token.toJwt(), roomName: doctor.roomName, username: identity });
+  });
+
+  socket.on("connectDoctor", req => {
+    connect.addDocToPool({doctorName: req.doctorName})
   });
 
   socket.on("disconnect", () => {

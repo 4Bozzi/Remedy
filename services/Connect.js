@@ -1,10 +1,10 @@
 module.exports = class Connect {
   constructor() {
-    this.availableDocs = ['Dr. Manhattan', 'Dr. Strange', 'Dr. Octavius'];
+    this.availableDocs = [];
     this.patientQueue = [];
   }
 
-  connectDoctor(patient) {
+  connectPatient(patient) {
     let availableDoctor = { doc: this.availableDocs.shift(), patient };
 
     if (!availableDoctor.doc) {
@@ -15,17 +15,23 @@ module.exports = class Connect {
     return availableDoctor.doc;
   }
 
-  // this get calls when the disconnect button is pressed
+  // this gets called when the disconnect button is pressed
   releaseDoctor(doctor) {
     this.availableDocs.push(doctor);
     let patient = this.patientQueue.shift();
     if (patient) {
-      patient.emit("FromAPI", this.connectDoctor(patient));
+      patient.emit("FromAPI", this.connectPatient(patient));
     }
   }
 
   enqueuePatient(patient) {
     this.patientQueue.push(patient);
+  }
+
+  addDocToPool(doctor){
+    doctor.roomName = Date.now();
+    //token?
+    this.availableDocs.push(doctor);
   }
 }
 

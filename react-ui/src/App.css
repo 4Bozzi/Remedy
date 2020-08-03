@@ -36,6 +36,15 @@ a{
   right: 0;
 }
 
+.homescreen{
+  display: flex;
+  flex-direction: column;
+}
+
+.homescreen a{
+  margin-bottom: 1em;
+}
+
 .local-participant video{
   width: 200px;
 }

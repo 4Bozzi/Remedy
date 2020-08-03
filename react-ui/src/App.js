@@ -8,6 +8,7 @@ import {
 import './App.css';
 import Home from './components/Home';
 import Lobby from './components/Lobby';
+import DoctorLobby from './components/DoctorLobby';
 
 const App = (props) => {
   return (
@@ -19,6 +20,9 @@ const App = (props) => {
             </Route>
             <Route path="/lobby">
               <Lobby />
+            </Route>
+            <Route path="/doclobby">
+              <DoctorLobby />
             </Route>
           </Switch>
         </div>

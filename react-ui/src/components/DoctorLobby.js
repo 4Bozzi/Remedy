@@ -12,9 +12,9 @@ function Lobby() {
   useEffect(() => {
     socket.current = socketIOClient();
 
-    socket.current.emit("FromAPI", {});
+    socket.current.emit("connectDoctor", {doctorName: 'Dr. Manhattan'});
 
-    socket.current.on("FromAPI", data => {
+    socket.current.on("connectDoctor", data => {
       setRoomName(data.roomName);
       setToken(data.token);
     });  
