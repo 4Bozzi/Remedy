@@ -3,7 +3,7 @@ import socketIOClient from "socket.io-client";
 import VideoCall from './VideoCall';
 import WaitingScreen from './WaitingScreen';
 
-const ENDPOINT = "http://127.0.0.1";
+//const ENDPOINT = "http://127.0.0.1";
 
 function Lobby() {
   const [roomName, setRoomName] =  useState(null);
@@ -12,7 +12,7 @@ function Lobby() {
   let socket = useRef(null);
 
   useEffect(() => {
-    socket.current = socketIOClient(ENDPOINT);
+    socket.current = socketIOClient();
 
     socket.current.emit("FromAPI", {});
 
