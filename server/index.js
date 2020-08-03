@@ -24,9 +24,7 @@ app.use(bodyParser.json());
 const INDEX = '../react-ui/build/index.html';
 
 const server = express()
-  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
-
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }));
 // const server = http.createServer(app);
 const io = socketIo(server);
 const connect = new Connect();
