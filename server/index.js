@@ -37,7 +37,11 @@ app.use(pino);
 app.use(cors());
 app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
-const server = http.createServer(app.listen(PORT));
+
+
+const server = http.createServer(app);
+
+server.listen(PORT, "127.0.0.1");
 //const io = socketIo(server);
 const io = require('socket.io').listen(server);
 io.origins('*:*')
