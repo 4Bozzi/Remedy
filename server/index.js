@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const http = require( "http" ).createServer( app );
 const io = require( "socket.io" )( http );
-http.listen(PORT, "127.0.0.1");
+http.listen(PORT);
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
