@@ -30,13 +30,13 @@ a{
   position:relative;
 }
 
-.participant{
+.local-participant{
   position: absolute;
   bottom: 0;
   right: 0;
 }
 
-.participant video{
+.local-participant video{
   width: 200px;
 }
 
