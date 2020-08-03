@@ -13,6 +13,7 @@ const numCPUs = require('os').cpus().length;
 
 const isDev = process.env.NODE_ENV !== 'production';
 const PORT = process.env.PORT || 3001;
+const SOCKET_PORT = 3001;
 
 // Multi-process to utilize all CPU cores.
 if (!isDev && cluster.isMaster) {
@@ -66,5 +67,5 @@ if (!isDev && cluster.isMaster) {
     });
   });
   app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
-  server.listen(PORT, () => console.log(`Socket server listening on port ${PORT}`));
+  server.listen(SOCKET_PORT, () => console.log(`Socket server listening on port ${SOCKET_PORT}`));
 }
