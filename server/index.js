@@ -62,7 +62,6 @@ if (!isDev && cluster.isMaster) {
       console.log("Client disconnected");
     });
   });
+
+  server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 }
-
-
-server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
