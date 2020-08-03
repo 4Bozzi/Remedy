@@ -3,8 +3,7 @@ import socketIOClient from "socket.io-client";
 import VideoCall from './VideoCall';
 import WaitingScreen from './WaitingScreen';
 
-//const ENDPOINT = "http://127.0.0.1:3001/";
-const ENDPOINT = "https://aqueous-brook-27897.herokuapp.com/"
+const ENDPOINT = "http://127.0.0.1";
 
 function Lobby() {
   const [roomName, setRoomName] =  useState(null);
