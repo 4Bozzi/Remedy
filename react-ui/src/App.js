@@ -8,7 +8,6 @@ import {
 import './App.css';
 import Home from './components/Home';
 import Lobby from './components/Lobby';
-import Admin from './components/Admin';
 
 const App = (props) => {
   return (
