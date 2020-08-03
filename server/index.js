@@ -26,7 +26,6 @@ app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
 
 const server = http.createServer(app.listen(PORT));
-server.use((req, res) => res.sendFile(path.resolve(__dirname, "../react-ui/build", "index.html")));
 //const io = socketIo(server);
 const io = require('socket.io').listen(server);
 const connect = new Connect();
