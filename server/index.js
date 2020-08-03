@@ -28,6 +28,7 @@ app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 const server = http.createServer(app.listen(PORT));
 //const io = socketIo(server);
 const io = require('socket.io').listen(server);
+io.origins('*:*')
 const connect = new Connect();
 
 io.on("connection", (socket) => {
