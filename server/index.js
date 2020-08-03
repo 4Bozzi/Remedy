@@ -10,9 +10,9 @@ const pino = require('express-pino-logger')();
 const path = require('path');
 
 const PORT = process.env.PORT || 3001;
-const SOCKET_PORT = 3001;
 
-const app = express();
+const INDEX = '../react-ui/build/index.html';
+const app = express().use((req, res) => res.sendFile(INDEX, { root: __dirname }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // app.use(pino);
@@ -21,11 +21,9 @@ app.use(bodyParser.json());
 //   res.sendFile(path.resolve(__dirname, "../react-ui/build", "index.html"));
 // });
 
-const INDEX = '../react-ui/build/index.html';
 
-const server = express()
-  .use((req, res) => res.sendFile(INDEX, { root: __dirname }));
-// const server = http.createServer(app);
+
+const server = http.createServer(app);
 const io = socketIo(server);
 const connect = new Connect();
 
