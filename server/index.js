@@ -11,8 +11,8 @@ const path = require('path');
 
 const PORT = process.env.PORT || 3001;
 
-const INDEX = '../react-ui/build/index.html';
-const app = express().use((req, res) => res.sendFile(path.resolve(__dirname, "../react-ui/build", "index.html")));
+
+const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // app.use(pino);
@@ -24,6 +24,7 @@ app.use(bodyParser.json());
 
 
 const server = http.createServer(app);
+server.use((req, res) => res.sendFile(path.resolve(__dirname, "../react-ui/build", "index.html")));
 const io = socketIo(server);
 const connect = new Connect();
 

@@ -6,10 +6,9 @@ import WaitingScreen from './WaitingScreen';
 const ENDPOINT = "http://127.0.0.1:3001/";
 
 function Lobby() {
-
   const [roomName, setRoomName] =  useState(null);
   const [token, setToken] = useState(null);
-  
+
   let socket = useRef(null);
 
   useEffect(() => {
