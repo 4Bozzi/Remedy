@@ -5,15 +5,17 @@ const Connect = require('../services/Connect.js')
 
 const cors = require('cors');
 const express = require('express');
-const http = require("http");
+//const http = require("http");
 //const socketIo = require("socket.io");
 const bodyParser = require('body-parser');
 const pino = require('express-pino-logger')();
 const path = require('path');
 
 const PORT = process.env.PORT || 3001;
-
 const app = express();
+const http = require( "http" ).createServer( app );
+const io = require( "socket.io" )( http );
+http.listen(PORT, "127.0.0.1");
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -38,10 +40,10 @@ app.use(cors());
 app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
 
-const server = http.createServer(app.listen(PORT));
-server.listen(PORT, "127.0.0.1");
+//const server = http.createServer(app.listen(PORT));
+
 //const io = socketIo(server);
-const io = require('socket.io').listen(server);
+// const io = require('socket.io').listen(http);
 io.origins('*:*')
 const connect = new Connect();
 
