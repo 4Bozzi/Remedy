@@ -12,7 +12,7 @@ function Lobby() {
   let socket = useRef(null);
 
   useEffect(() => {
-    socket.current = socketIOClient('http://localhost');
+    socket.current = socketIOClient();
 
     socket.current.emit("FromAPI", {});
 
