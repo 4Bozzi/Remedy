@@ -38,13 +38,35 @@ io.on("connection", (socket) => {
 
   socket.on("connectPatient", req => {
     console.log("Attempt to connect patient to a doctor");
-    const doctor = connect.connectPatient(socket); 
+    let doctor = connect.connectPatient(socket); 
+
+    //check if doctor and connect
+    if(doctor){
+      const identity = `User:${Date.now()}`;
+      const patientToken = videoToken(identity, doctor.roomName, config);
+      const doctorToken = videoToken(doctor.doctorName, doctor.roomName, config);
+  
+      socket.emit("connectPatient", { token: patientToken.toJwt(), roomName: doctor.roomName, username: identity });
+      doctor.socket.emit("connectDoctor", { token: doctorToken.toJwt(), roomName: doctor.roomName, username: doctor.doctorName });
+    }
   });
 
   socket.on("connectDoctor", req => {
     console.log("New doctor connecting!")
     socket.doctorName = req.doctorName;
-    connect.addDocToPool({doctorName: req.doctorName, socket})
+    let result = connect.addDocToPool({doctorName: req.doctorName, socket})
+
+    //check if patient and connect
+    if(result.patient){
+      const identity = `User:${Date.now()}`;
+      const roomName;
+      const doctorName;
+      const patientToken = videoToken(identity, result.doctor.roomName, config);
+      const doctorToken = videoToken(result.doctor.doctorName, result.doctor.roomName, config);
+  
+      result.patient.emit("connectPatient", { token: patientToken.toJwt(), roomName: result.doctor.roomName, username: identity });
+      socket.emit("connectDoctor", { token: doctorToken.toJwt(), roomName: result.doctor.roomName, username: result.doctor.doctorName });
+    }
   });
 
   socket.on("disconnect", () => {
