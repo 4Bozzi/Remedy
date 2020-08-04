@@ -23,7 +23,7 @@ function DoctorLobby() {
 
   const handleLogout = useCallback(event => {
     setToken("");
-    socket.current.disconnect(false);
+    socket.current.emit("disconnectDoctor", {doctorName: 'Dr. Manhattan'});
   }, []);
 
   return (

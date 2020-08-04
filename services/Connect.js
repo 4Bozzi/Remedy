@@ -21,11 +21,11 @@ module.exports = class Connect {
     doctor.roomName = Date.now();
     this.availableDocs.push(doctor);
     let patient = this.patientQueue.shift();
+    if(patient){
+      console.log("There is a patient in line, connecting them to a doctor!")
+      this.availableDocs.shift();
+    }
     return {patient, doctor};
-    // if (patient) {
-    //   console.log("There is a patient in line, connecting them to a doctor!")
-    //   patient.emit("FromAPI", this.connectPatient(patient));
-    // }
   }
 
   //when more patients than doctors

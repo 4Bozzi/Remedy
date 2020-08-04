@@ -59,8 +59,21 @@ io.on("connection", (socket) => {
     //check if patient and connect
     if(result.patient){
       const identity = `User:${Date.now()}`;
-      // const roomName;
-      // const doctorName;
+      const patientToken = videoToken(identity, result.doctor.roomName, config);
+      const doctorToken = videoToken(result.doctor.doctorName, result.doctor.roomName, config);
+  
+      result.patient.emit("connectPatient", { token: patientToken.toJwt(), roomName: result.doctor.roomName, username: identity });
+      socket.emit("connectDoctor", { token: doctorToken.toJwt(), roomName: result.doctor.roomName, username: result.doctor.doctorName });
+    }
+  });
+
+  socket.on("disconnectDoctor",() => {
+    console.log("A doctor disconnected, we need to keep this socket though...")
+    let result = connect.addDocToPool({doctorName: socket.doctorName, socket});
+  
+    //check if patient and connect
+    if(result.patient){
+      const identity = `User:${Date.now()}`;
       const patientToken = videoToken(identity, result.doctor.roomName, config);
       const doctorToken = videoToken(result.doctor.doctorName, result.doctor.roomName, config);
   
@@ -70,11 +83,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    if(socket.doctorName){
-      console.log("A doctor disconnected, we need to keep this socket though...")
-      connect.addDocToPool({doctorName: socket.doctorName, socket});
-    }
-    
     console.log("Client disconnected");
   });
 });
