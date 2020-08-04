@@ -23,7 +23,7 @@ function DoctorLobby() {
 
   const handleLogout = useCallback(event => {
     setToken("");
-    socket.current.disconnect(true);
+    socket.current.disconnect(false);
   }, []);
 
   return (

@@ -4,19 +4,21 @@ module.exports = class Connect {
     this.patientQueue = [];
   }
 
+  //when a patient hits attempts to connect
   connectPatient(patient) {
     let availableDoctor = { doc: this.availableDocs.shift(), patient };
 
     if (!availableDoctor.doc) {
-      // display waiting screen 
+      // display waiting screen for patient
       this.enqueuePatient(patient);
     }
-
     return availableDoctor.doc;
   }
 
-  // this gets called when the disconnect button is pressed
-  releaseDoctor(doctor) {
+  //when a doctor connects or a call ends
+  addDocToPool(doctor) {
+    doctor.roomName = Date.now();
+
     this.availableDocs.push(doctor);
     let patient = this.patientQueue.shift();
     if (patient) {
@@ -24,14 +26,9 @@ module.exports = class Connect {
     }
   }
 
+  //when more patients than doctors
   enqueuePatient(patient) {
     this.patientQueue.push(patient);
-  }
-
-  addDocToPool(doctor){
-    doctor.roomName = Date.now();
-    //token?
-    this.availableDocs.push(doctor);
   }
 }
 
