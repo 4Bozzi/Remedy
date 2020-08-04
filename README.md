@@ -1,7 +1,6 @@
 # Remedy
 
-This is a project done for Remedy (https://myremedy.com/). The idea is that a person in need of emergency assistance can come to the site and be linked up to a medical professal
-via a video call.
+This is a take home assessment project I did for Remedy (https://myremedy.com/). The idea is that a person in need of emergency assistance can come to the site and be linked up to a medical professal via a video call.
 
 Currently you select either "I have an emergency" or "I am a doctor".
 
