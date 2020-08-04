@@ -59,8 +59,8 @@ io.on("connection", (socket) => {
     //check if patient and connect
     if(result.patient){
       const identity = `User:${Date.now()}`;
-      const roomName;
-      const doctorName;
+      // const roomName;
+      // const doctorName;
       const patientToken = videoToken(identity, result.doctor.roomName, config);
       const doctorToken = videoToken(result.doctor.doctorName, result.doctor.roomName, config);
   
