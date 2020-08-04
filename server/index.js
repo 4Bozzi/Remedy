@@ -37,31 +37,20 @@ io.on("connection", (socket) => {
   console.log("New client connected");
 
   socket.on("connectPatient", req => {
-    let doctor = connect.connectPatient(socket);
-    const identity = `User:${Date.now()}`;
-    const patientToken = videoToken(identity, doctor.roomName, config);
-    const doctorToken = videoToken(doctor.doctorName, doctor.roomName, config);
-
-    // JSON.stringify({
-    //   token: patientToken.toJwt()
-    // })
-
-    // JSON.stringify({
-    //   token: doctorToken.toJwt()
-    // })
-
-    socket.emit("connectPatient", { token: patientToken.toJwt(), roomName: doctor.roomName, username: identity });
-    doctor.socket.emit("connectDoctor", { token: doctorToken.toJwt(), roomName: doctor.roomName, username: doctor.doctorName });
+    console.log("Attempt to connect patient to a doctor");
+    const doctor = connect.connectPatient(socket); 
   });
 
   socket.on("connectDoctor", req => {
+    console.log("New doctor connecting!")
     socket.doctorName = req.doctorName;
     connect.addDocToPool({doctorName: req.doctorName, socket})
   });
 
   socket.on("disconnect", () => {
     if(socket.doctorName){
-      connect.addDocToPool(socket.doctorName, socket);
+      console.log("A doctor disconnected, we need to keep this socket though...")
+      connect.addDocToPool({doctorName: socket.doctorName, socket});
     }
     
     console.log("Client disconnected");
