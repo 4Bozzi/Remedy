@@ -40,14 +40,19 @@ io.on("connection", (socket) => {
     let doctor = connect.connectPatient(socket);
     const identity = `User:${Date.now()}`;
     // const room = "TEST";
-    const token = videoToken(identity, doctor.roomName, config);
+    const patientToken = videoToken(identity, doctor.roomName, config);
+    const doctorToken = videoToken(doctor.doctorName, doctor.roomName, config);
 
     JSON.stringify({
-      token: token.toJwt()
+      token: patientToken.toJwt()
     })
 
-    socket.emit("FromAPI", { token: token.toJwt(), roomName: doctor.roomName, username: identity });
-    doctor.socket.emit("connectDoctor", { token: token.toJwt(), roomName: doctor.roomName, username: doctor.doctorName });
+    JSON.stringify({
+      token: doctorToken.toJwt()
+    })
+
+    socket.emit("FromAPI", { token: patientToken.toJwt(), roomName: doctor.roomName, username: identity });
+    doctor.socket.emit("connectDoctor", { token: doctorToken.toJwt(), roomName: doctor.roomName, username: doctor.doctorName });
   });
 
   socket.on("connectDoctor", req => {
