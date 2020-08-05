@@ -2,6 +2,8 @@
 
 This is a take home assessment project I did for Remedy (https://myremedy.com/). The idea is that a person in need of emergency assistance can come to the site and be linked up to a medical professal via a video call.
 
+It uses React for the front end, Node.js for the backend, Twilio for the videos calls, Socket.io to keep connections open and handle communication between the clients. It is hosted on Heroku.
+
 Currently you select either "I have an emergency" or "I am a doctor".
 
 If you click "I am a doctor" you will be added to a pool of available doctors. If there are already patients in a queue you will immediately be connected
